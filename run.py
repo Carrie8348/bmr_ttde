@@ -15,16 +15,28 @@ SHEET = GSPREAD_CLIENT.open('fitness')
 
 def get_user_info():
     """
-    Get user basic info for calculate BMR
+    Get user basic info for calculate BMR,
+    un a while loop to collect a valid string of data from the user
+    via the terminal, which must be a string of 3 numbers separated
+    by commas. The loop will repeatedly request data, until it is valid.
     """
-    print("Hello, this is User BMR calculating center...\n")
-    print("Please enter your weight(kg), height(cm) and age here...\n")
-    print("Example: 59, 165, 30\n")
 
-    data_str = input("Enter your data here:")
+    while True:
+        print("Hello, this is User BMR calculating center...\n")
+        print("Please enter your weight(kg), height(cm) and age here...\n")
+        print("Example: 59, 165, 30\n")
 
-    user_data = data_str.split(",")
-    print(f"The data provide is {data_str}")
+        data_str = input("Enter your data here:")
+
+        user_data = data_str.split(",")
+        validate_user_data(user_data)
+
+        if validate_user_data(user_data):
+            print("Data is valid!")
+            break
+
+        print(f"The data provide is {data_str}")
+
     return user_data
 
 def validate_user_data(values):
