@@ -22,9 +22,9 @@ def get_user_info():
     """
 
     while True:
-        print("Hello, this is User BMR calculating center...\n")
-        print("Please enter your weight(kg), height(cm) and age here...\n")
-        print("Example: 59, 165, 30\n")
+        print("Hello, this is User BMI calculating center...\n")
+        print("Please enter your weight(kg), height(cm)here...\n")
+        print("Example: 60, 162\n")
 
         data_str = input("Enter your data here:")
 
@@ -43,13 +43,13 @@ def validate_user_data(values):
     """
     Inside the try, convert strings into values, 
     raise ValueError if strings cannot be converted into int,
-    or if there aren't exactly 3 values.
+    or if there aren't exactly 2 values.
     """
     try:
         [int(value) for value in values]
-        if len(values) != 3:
+        if len(values) != 2:
             raise ValueError(
-                f"Exactly 3 values required, you provide {len(values)}"
+                f"Exactly 2 values required, you provide {len(values)}"
             )
     except ValueError as e:
         print(f"Invalid data:{e}, please try again. \n")
@@ -68,10 +68,23 @@ def update_user_dataworksheet(data):
     user_worksheet.append_row(user_data)
     print("User worksheet updated successfully.\n")
 
-def calculate_bmr(user_data):
-    print('')
+def calculate_bmi(user_data):
+    """
+    Calculate user bmi based on the string value
+    """
+    weight = user_data[0]
+    height = user_data[1]
+    result = (weight / height / height) * 10000
+    rounded_result = round(result, 2)
+    print(f"Your BMI is {rounded_result}..\n")
+
+    return rounded_result
+
+
 
 user_data = get_user_info()
 user_data = [int(num) for num in user_data]
 update_user_dataworksheet(user_data)
-calculate_bmr(user_data)
+calculate_bmi(user_data)
+update_user_bmi_dataworksheet(user_data)
+
