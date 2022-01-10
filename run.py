@@ -1,5 +1,8 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from pprint import pprint
+from googleapiclient import discovery
+
 
 
 SCOPE = [
@@ -58,7 +61,6 @@ def validate_user_data(values):
     
     return True
 
-
 def update_user_dataworksheet(data):
     """
     Update user data from the input, and add new row
@@ -73,22 +75,26 @@ def calculate_bmi(user_data):
     """
     Calculate user bmi based on the string value
     """
+    print("Calculating BMI...\n")
+    bmi_data = []
     weight = user_data[0]
     height = user_data[1]
     result = (weight / height / height) * 10000
     rounded_result = round(result, 2)
-    print(f"Your BMI is {rounded_result}..\n")
+    bmi_data = rounded_result
+    print(f"Your BMI is {bmi_data}..\n")
 
-    return rounded_result
+    return bmi_data
+  
 
-def update_user_bmi_dataworksheet(rounded_result):
+def update_bmi_worksheet(new_bmi_data):
     """
-    Update google sheet ,and new column with calculated BMI results
+    Update bmi data in worksheet
     """
-    print("Updating BMI in database...\n")
-    user_bmi_worksheet = SHEET.worksheet("user_info") 
-
-    return 
+    print("Updating BMI sheet...'\n")
+    bmi_worksheet = SHEET.worksheet("bmi")
+    bmi_worksheet.append_row(new_bmi_data)
+    print("BMI worksheet updated successfully.\n")
     
 
 def main():
@@ -98,7 +104,7 @@ def main():
     user_data = get_user_info()
     user_data = [int(num) for num in user_data]
     update_user_dataworksheet(user_data)
-    calculate_bmi(user_data)
-    update_user_bmi_dataworksheet(user_data)
+    new_bmi_data = [calculate_bmi(user_data)]
+    update_bmi_worksheet(new_bmi_data)
 
 main()
