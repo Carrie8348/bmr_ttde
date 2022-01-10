@@ -3,8 +3,6 @@ from google.oauth2.service_account import Credentials
 from pprint import pprint
 from googleapiclient import discovery
 
-
-
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -20,13 +18,12 @@ SHEET = GSPREAD_CLIENT.open('fitness')
 def get_user_info():
     """
     Get user basic info for calculate BMR,
-    un a while loop to collect a valid string of data from the user
+    Run a while loop to collect a valid string of data from the user
     via the terminal, which must be a string of 3 numbers separated
     by commas. The loop will repeatedly request data, until it is valid.
     """
 
     while True:
-        print("Hello, this is User BMI calculating center...\n")
         print("Please enter your weight(kg), height(cm) here...\n")
         print("Example: 60, 162\n")
 
@@ -43,11 +40,11 @@ def get_user_info():
 
     return user_data
 
+
 def validate_user_data(values):
     """
-    Inside the try, convert strings into values, 
-    raise ValueError if strings cannot be converted into int,
-    or if there aren't exactly 2 values.
+    Inside the try, convert strings into values, raise ValueError if strings
+    cannot be converted into int,or if there aren't exactly 2 values.
     """
     try:
         [int(value) for value in values]
@@ -58,8 +55,8 @@ def validate_user_data(values):
     except ValueError as e:
         print(f"Invalid data:{e}, please try again. \n")
         return False
-    
     return True
+
 
 def update_user_dataworksheet(data):
     """
@@ -70,6 +67,7 @@ def update_user_dataworksheet(data):
     user_worksheet = SHEET.worksheet("user_info")
     user_worksheet.append_row(data)
     print("User worksheet updated successfully.\n")
+
 
 def calculate_bmi(user_data):
     """
@@ -85,7 +83,7 @@ def calculate_bmi(user_data):
     print(f"Your BMI is {bmi_data}..\n")
 
     return bmi_data
-  
+
 
 def update_bmi_worksheet(new_bmi_data):
     """
@@ -95,7 +93,7 @@ def update_bmi_worksheet(new_bmi_data):
     bmi_worksheet = SHEET.worksheet("bmi")
     bmi_worksheet.append_row(new_bmi_data)
     print("BMI worksheet updated successfully.\n")
-    
+
 
 def main():
     """
@@ -107,4 +105,5 @@ def main():
     new_bmi_data = [calculate_bmi(user_data)]
     update_bmi_worksheet(new_bmi_data)
 
+print("Hello, this is User BMI calculating center...\n")
 main()
