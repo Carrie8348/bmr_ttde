@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -23,7 +24,7 @@ def get_user_info():
 
     while True:
         print("Hello, this is User BMI calculating center...\n")
-        print("Please enter your weight(kg), height(cm)here...\n")
+        print("Please enter your weight(kg), height(cm) here...\n")
         print("Example: 60, 162\n")
 
         data_str = input("Enter your data here:")
@@ -65,7 +66,7 @@ def update_user_dataworksheet(data):
     """
     print("Updating User Data...\n")
     user_worksheet = SHEET.worksheet("user_info")
-    user_worksheet.append_row(user_data)
+    user_worksheet.append_row(data)
     print("User worksheet updated successfully.\n")
 
 def calculate_bmi(user_data):
@@ -80,11 +81,24 @@ def calculate_bmi(user_data):
 
     return rounded_result
 
+def update_user_bmi_dataworksheet(rounded_result):
+    """
+    Update google sheet ,and new column with calculated BMI results
+    """
+    print("Updating BMI in database...\n")
+    user_bmi_worksheet = SHEET.worksheet("user_info") 
 
+    return 
+    
 
-user_data = get_user_info()
-user_data = [int(num) for num in user_data]
-update_user_dataworksheet(user_data)
-calculate_bmi(user_data)
-update_user_bmi_dataworksheet(user_data)
+def main():
+    """
+    Run all programs
+    """
+    user_data = get_user_info()
+    user_data = [int(num) for num in user_data]
+    update_user_dataworksheet(user_data)
+    calculate_bmi(user_data)
+    update_user_bmi_dataworksheet(user_data)
 
+main()
