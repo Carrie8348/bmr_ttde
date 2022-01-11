@@ -1,31 +1,41 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+***BMI Calculator***
 
-Welcome Carrie8348,
+Hello everyone, 
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+This is the Code Institute student template for deploying my third portfolio project, the Python command-line project. 
 
-## Reminders
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+![mockup](assets/images/mock-up.png)
+***The Purpose***
+Gym A is going to make a workout plan fit for day-to-day people who don't have enough fitness experiences or knowledge. In order to have a analysis on how people's general status is, they need this app for user to input their height and weight so that they can gather this information and calculate the BMI of the user. They can then get a more clear picture of what are the majority status. The user input information (weight and height)and BMI number will then be collected in their google sheet.
 
-## Creating the Heroku app
+For the user, they can see their BMI number at terminal after input their info.
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+***How to use***
+On the program, there will be welcome message and remind message:
+![mockup](assets/images/bmi_screen.png)
+User input weight and height in number, the program will calculate the bmi, and then return the message to the screen with BMI results.
 
-1. `heroku/python`
-2. `heroku/nodejs`
+And on the Gym A google sheet, there will be user info and bmi sheets included, which updated after user input the info, and bmi gets calculated:
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+![mockup](assets/images/googlesheet_userinfo.png)
+![mockup](assets/images/googlesheet_bmi.png)
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+***Other Info***
+This program is written in Python, with the help of Love Sandwiches, I use the similar idea to create a simple logic, and to have it runnable on terminal.
 
-Connect your GitHub repository and deploy as normal.
+In the future, I'd like to complete more basic info such as, BMR calculation and choose workout plan for user based on the analyzed information.
 
-## Constraints
+***Validate Test***
+This program is tested on PEP8, and passed with no problem:
+![mockup](assets/images/pep8.png)
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+***Deployment***
+This project was successfully deployed on Heroku:
+https://bmi0408.herokuapp.com/
 
------
-Happy coding!
+***Credits***
+Love-Sandwiches walk through classes by Code Institute
+
+
+
